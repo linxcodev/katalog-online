@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('supplier')->group(function () {
+  Route::get('/', 'SupplierController@index');
+  Route::post('/', 'SupplierController@store')->name('supplier.store');
+});
