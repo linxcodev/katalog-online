@@ -9,7 +9,9 @@ class SupplierController extends Controller
 {
   public function index()
   {
-    return view('supplier');
+    $supplier = Supplier::all();
+
+    return view('supplier', ['suppliers' => $supplier]);
   }
 
   public function store(Request $request)
@@ -21,6 +23,6 @@ class SupplierController extends Controller
 
     Supplier::create($request->all());
 
-    return view('supplier');
+    return redirect()->route('supplier.index');
   }
 }

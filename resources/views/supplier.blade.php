@@ -65,30 +65,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Bagus</td>
-          <td>bagus@domain.com</td>
-          <td>Semarang</td>
-          <td>30 tahun</td>
-          <td><a href="#" class="btn btn-primary">Edit</a> <a href="#" class="btn btn-danger">Hapus</a> </td>
-        </tr>
-        <tr>
-          <td>Bagus</td>
-          <td>bagus@domain.com</td>
-          <td>Semarang</td>
-          <td>30 tahun</td>
-          <td>
-            <a href="#" class="btn btn-primary">Edit</a>
-            <a href="#" class="btn btn-danger hps">Hapus</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Bagus</td>
-          <td>bagus@domain.com</td>
-          <td>Semarang</td>
-          <td>30 tahun</td>
-          <td><a href="#" class="btn btn-primary">Edit</a> <a href="#" class="btn btn-danger">Hapus</a> </td>
-        </tr>
+        @foreach ($suppliers as $supplier)
+          <tr>
+            <td>{{ $supplier->nama }}</td>
+            <td>{{ $supplier->email }}</td>
+            <td>{{ $supplier->kota }}</td>
+            <td>{{ $supplier->tahun }}</td>
+            <td><a href="#" class="btn btn-primary">Edit</a> <a href="#" class="btn btn-danger">Hapus</a> </td>
+          </tr>
+        @endforeach
       </tbody>
     </table>
   </div>

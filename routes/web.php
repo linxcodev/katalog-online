@@ -16,6 +16,6 @@ Route::get('/', function () {
 });
 
 Route::prefix('supplier')->group(function () {
-  Route::get('/', 'SupplierController@index');
+  Route::get('/', 'SupplierController@index')->name('supplier.index');
   Route::post('/', 'SupplierController@store')->name('supplier.store');
 });
