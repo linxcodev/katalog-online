@@ -37,4 +37,11 @@ class SupplierController extends Controller
 
     return redirect()->route('supplier.index');
   }
+
+  public function destroy(Request $request)
+  {
+    Supplier::destroy($request->hpsid);
+
+    return redirect()->route('supplier.index');
+  }
 }

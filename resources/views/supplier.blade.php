@@ -74,8 +74,10 @@
             <td>
               <a href="#" class="btn btn-primary" data-toggle="modal"
               data-nama="{{$supplier->nama}}" data-email="{{$supplier->email}}"
-              data-id={{$supplier->id}} data-kota="{{$supplier->kota}}" data-tahun="{{$supplier->tahun}}"
-              data-target="#edit">Edit</a> <a href="#" class="btn btn-danger">Hapus</a>
+              data-id={{$supplier->id}} data-kota="{{$supplier->kota}}"
+              data-tahun="{{$supplier->tahun}}" data-target="#edit">Edit</a>
+              <a href="#" data-toggle="modal" data-target="#delete"
+              data-id={{$supplier->id}} class="btn btn-danger">Hapus</a>
             </td>
           </tr>
         @endforeach
@@ -122,6 +124,26 @@
               </div>
             </div>
           </div>
+      </div>
+    </div>
+    <div class="modal modal-danger fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header rmb">
+            <h4 class="modal-title" id="myModalLabel">Apakah anda yakin?</h4>
+          </div>
+          <form action="{{route('supplier.destroy')}}" method="post">
+          		@method('delete')
+          		@csrf
+    	      <div class="modal-body">
+  	      		<input type="hidden" name="hpsid" id="delid">
+    	      </div>
+    	      <div class="modal-footer">
+    	        <button type="button" class="btn btn-success" data-dismiss="modal">Batal</button>
+    	        <button type="submit" class="btn btn-danger">Hapus</button>
+    	      </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

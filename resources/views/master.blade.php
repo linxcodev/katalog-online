@@ -37,6 +37,14 @@
         modal.find('.modal-body #kota').val(kota);
         modal.find('.modal-body #tahun').val(tahun);
       })
+
+      $('#delete').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var id = button.data('id')
+
+        var modal = $(this)
+        modal.find('.modal-body #delid').val(id);
+      })
     </script>
   </body>
 </html>

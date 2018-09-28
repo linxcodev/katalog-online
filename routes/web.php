@@ -19,4 +19,5 @@ Route::prefix('supplier')->group(function () {
   Route::get('/', 'SupplierController@index')->name('supplier.index');
   Route::post('/', 'SupplierController@store')->name('supplier.store');
   Route::put('/', 'SupplierController@update')->name('supplier.update');
+  Route::delete('/delete', 'SupplierController@destroy')->name('supplier.destroy');
 });

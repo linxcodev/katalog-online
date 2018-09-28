@@ -82,3 +82,7 @@ label {
 label ~ label {
   margin-top: 17px
 }
+
+.rmb {
+  border-bottom: none
+}
