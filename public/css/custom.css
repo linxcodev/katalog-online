@@ -41,7 +41,7 @@ thead {
   background-color: #f8f9fa
 }
 
-td > .btn-primary {
+td > .btn-primary, .btn-info {
   padding: 2px .75rem;
   border-radius: 5px;
 }
@@ -71,7 +71,7 @@ label {
 
 .form-control {
   border-radius: 7px;
-  padding: 3px 2px;
+  padding: 3px .75rem;
   height: inherit;
 }
 
@@ -85,4 +85,12 @@ label ~ label {
 
 .rmb {
   border-bottom: none
+}
+
+#ccl {
+  margin: 14px 0 0 0;
+}
+
+.mgtp {
+  margin-top: 8px
 }
