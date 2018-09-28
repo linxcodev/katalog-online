@@ -25,4 +25,16 @@ class SupplierController extends Controller
 
     return redirect()->route('supplier.index');
   }
+
+  public function update(Request $request)
+  {
+    $request->validate([
+      'nama' => 'required', 'email' => 'required|email|unique:suppliers',
+      'kota' => 'required', 'tahun' => 'required'
+    ]);
+
+    Supplier::find($request->edtid)->update($request->except(['_method', 'edtid']));
+
+    return redirect()->route('supplier.index');
+  }
 }
