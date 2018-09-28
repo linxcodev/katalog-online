@@ -15,11 +15,11 @@ class SupplierController extends Controller
   public function store(Request $request)
   {
     $request->validate([
-      'name' => 'required', 'email' => 'required|email|unique:suppliers',
+      'nama' => 'required', 'email' => 'required|email|unique:suppliers',
       'kota' => 'required', 'tahun' => 'required'
     ]);
 
-    $supplier = Supplier::create($request->all());
+    Supplier::create($request->all());
 
     return view('supplier');
   }
