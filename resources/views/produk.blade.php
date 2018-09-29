@@ -54,19 +54,19 @@
       <thead>
         <tr>
           <th scope="col">Nama</th>
-          <th scope="col">email</th>
-          <th scope="col">Kota</th>
-          <th scope="col">Umur</th>
+          <th scope="col">Supplier</th>
+          <th scope="col">Harga Jual</th>
+          <th scope="col">Status</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        {{-- @foreach ($suppliers as $supplier) --}}
+        @foreach ($produks as $produk)
           <tr>
-            <td>{{ '$supplier->nama' }}</td>
-            <td>{{ '$supplier->email' }}</td>
-            <td>{{ '$supplier->kota' }}</td>
-            <td>{{ '$supplier->tahun' }}</td>
+            <td>{{ $produk->nama }}</td>
+            <td>{{ $produk->supplier->nama }}</td>
+            <td>Rp. {{ number_format($produk->harga, 0, ",", ".") }}</td>
+            <td>{{ $produk->status }}</td>
             <td>
               <a href="#" class="btn btn-info" data-toggle="modal"
               data-nama="{{'$supplier->nama'}}" data-email="{{'$supplier->email'}}"
@@ -76,7 +76,7 @@
               data-id={{'$supplier->id'}} class="btn btn-danger">Hapus</a>
             </td>
           </tr>
-        {{-- @endforeach --}}
+        @endforeach
       </tbody>
     </table>
     <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

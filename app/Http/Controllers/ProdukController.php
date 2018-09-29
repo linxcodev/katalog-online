@@ -10,9 +10,10 @@ class ProdukController extends Controller
 {
   public function index()
   {
+    $produk = Produk::all();
     $supplier = Supplier::all();
 
-    return view('produk', ['suppliers' => $supplier]);
+    return view('produk', ['produks' => $produk, 'suppliers' => $supplier]);
   }
 
   public function store(Request $request)
