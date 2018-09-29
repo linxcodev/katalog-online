@@ -13,40 +13,41 @@
     <!-- Modal -->
     <div class="modal fade" id="tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm" role="document">
-          <div class="modal-content">
-            <div class="modal-header bg-primary">
-              <h5 class="modal-title" id="exampleModalLabel">Tambah Produk</h5>
-            </div>
-            <div class="mg">
-              <form action="{{ route('supplier.store') }}" method="post">
-                @csrf
-                <div class="modal-body">
-                  <label>Nama:</label>
-                  <input type="text" name="nama" class="form-control">
-                  <label>Supplier:</label>
-                  <select class="form-control" name="supplier">
-                    <option value="Bagus">Bagus</option>
-                    <option value="Agus">Agus</option>
-                    <option value="Bogem">Bogem</option>
-                    <option value="Sopo">Sopo</option>
-                  </select>
-                  <label>Harga Jual:</label>
-                  <input type="number" name="harga" class="form-control">
-                  <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" name="aktif" type="checkbox" id="customCheck1">
-                    <label class="custom-control-label" id="ccl" for="customCheck1">
-                      Aktif
-                    </label>
-                  </div>
-                  <label for="exampleFormControlFile1">Gambar:</label>
-                  <input type="file" class="form-control-file" name="gambar" id="exampleFormControlFile1">
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
-              </form>
-            </div>
+        <div class="modal-content">
+          <div class="modal-header bg-primary">
+            <h5 class="modal-title" id="exampleModalLabel">Tambah Produk</h5>
           </div>
+          <div class="mg">
+            <form action="{{ route('produk.store') }}" method="post" enctype="multipart/form-data">
+              @csrf
+              <div class="modal-body">
+                <label>Nama:</label>
+                <input type="text" name="nama" class="form-control">
+                <label>Supplier:</label>
+                <select class="form-control" name="supplier_id">
+                  @foreach ($suppliers as $supplier)
+                  <option value="{{ $supplier->id }}">
+                    {{ $supplier->nama }}
+                  </option>
+                  @endforeach
+                </select>
+                <label>Harga Jual:</label>
+                <input type="number" name="harga" class="form-control">
+                <div class="custom-control custom-checkbox">
+                  <input class="custom-control-input" name="status" type="checkbox" id="customCheck1">
+                  <label class="custom-control-label" id="ccl" for="customCheck1">
+                    Aktif
+                  </label>
+                </div>
+                <label for="exampleFormControlFile1">Gambar:</label>
+                <input type="file" class="form-control-file" name="gambar" id="exampleFormControlFile1">
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
     <table class="table">
@@ -101,7 +102,7 @@
                   <label>Harga Jual:</label>
                   <input type="number" name="harga" class="form-control">
                   <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" name="aktif" type="checkbox" id="customCheck1">
+                    <input class="custom-control-input" name="status" type="checkbox" id="customCheck1">
                     <label class="custom-control-label" id="ccl" for="customCheck1">
                       Aktif
                     </label>

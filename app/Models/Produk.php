@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Supplier extends Model
+class Produk extends Model
 {
   protected $guarded = [];
 
-  public function produks()
+  public function supplier()
   {
-    return $this->hasMany('App\Models\Produk');
+    return $this->belongsTo('App\Models\Supplier');
   }
 }
