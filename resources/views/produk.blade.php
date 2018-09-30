@@ -26,9 +26,9 @@
                 <label>Supplier:</label>
                 <select class="form-control" name="supplier_id">
                   @foreach ($suppliers as $supplier)
-                  <option value="{{ $supplier->id }}">
-                    {{ $supplier->nama }}
-                  </option>
+                    <option value="{{ $supplier->id }}">
+                      {{ $supplier->nama }}
+                    </option>
                   @endforeach
                 </select>
                 <label>Harga Jual:</label>
@@ -68,12 +68,12 @@
             <td>Rp. {{ number_format($produk->harga, 0, ",", ".") }}</td>
             <td>{{ $produk->status }}</td>
             <td>
-              <a href="#" class="btn btn-info" data-toggle="modal"
-              data-nama="{{'$supplier->nama'}}" data-email="{{'$supplier->email'}}"
-              data-id={{'$supplier->id'}} data-kota="{{'$supplier->kota'}}"
-              data-tahun="{{'$supplier->tahun'}}" data-target="#edit">Edit</a>
+              <a href="#" class="btn btn-info" data-toggle="modal" data-id="{{$produk->id}}"
+              data-nama="{{$produk->nama}}" data-supplier="{{$produk->supplier->id}}"
+              data-harga="{{$produk->harga}}" data-status="{{$produk->status}}"
+              data-gambar="{{asset('storage/img/'.$produk->gambar)}}" data-target="#edit">Edit</a>
               <a href="#" data-toggle="modal" data-target="#delete"
-              data-id={{'$supplier->id'}} class="btn btn-danger">Hapus</a>
+              data-id={{$produk->id}} class="btn btn-danger">Hapus</a>
             </td>
           </tr>
         @endforeach
@@ -83,27 +83,29 @@
       <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="modal-header bg-primary">
-              <h5 class="modal-title" id="exampleModalLabel">Edit Supplier</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Edit Produk</h5>
             </div>
             <div class="mg">
-              <form id="edtform" action="{{ route('supplier.update') }}" method="post">
+              <form id="edtform" action="{{ route('produk.update') }}" method="post" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="modal-body">
+                  <input type="hidden" name="edtid" id="edtid">
                   <label>Nama:</label>
-                  <input type="text" name="nama" class="form-control">
+                  <input type="text" name="nama" class="form-control" id="nama">
                   <label>Supplier:</label>
-                  <select class="form-control" name="supplier">
-                    <option value="Bagus">Bagus</option>
-                    <option value="Agus">Agus</option>
-                    <option value="Bogem">Bogem</option>
-                    <option value="Sopo">Sopo</option>
+                  <select class="form-control" name="supplier" id="supplier">
+                    @foreach ($suppliers as $supplier)
+                      <option value="{{$supplier->id}}">
+                        {{ $supplier->nama }}
+                      </option>
+                    @endforeach
                   </select>
                   <label>Harga Jual:</label>
-                  <input type="number" name="harga" class="form-control">
+                  <input type="number" name="harga" class="form-control" id="harga">
                   <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" name="status" type="checkbox" id="customCheck1">
-                    <label class="custom-control-label" id="ccl" for="customCheck1">
+                    <input class="custom-control-input" name="status" type="checkbox" id="ckedt">
+                    <label class="custom-control-label" id="ccl" for="ckedt">
                       Aktif
                     </label>
                   </div>
@@ -112,7 +114,8 @@
                 </div>
                 <div class="modal-footer">
                   <div class="col-md-6">
-                    <img src="" alt="noimg" width="200px" height="200px">
+                    <img src="" onerror="this.src='{{asset('img/noimage.png')}}'"
+                    alt="noimg" width="100px" height="100px" id="gambar">
                   </div>
                   <div class="col-md-6 text-center">
                     <button type="submit" class="btn btn-primary">Simpan</button>
@@ -130,7 +133,7 @@
           <div class="modal-header rmb">
             <h4 class="modal-title" id="myModalLabel">Apakah anda yakin?</h4>
           </div>
-          <form action="{{route('supplier.destroy')}}" method="post">
+          <form action="{{route('produk.destroy')}}" method="post">
           		@method('delete')
           		@csrf
     	      <div class="modal-body">
@@ -145,4 +148,36 @@
       </div>
     </div>
   </div>
+@endsection
+
+@section('script')
+  $('#edit').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var nama = button.data('nama')
+    var supplier = button.data('supplier')
+    var harga = button.data('harga')
+    var status = button.data('status')
+    var gambar = button.data('gambar')
+
+    var modal = $(this)
+    modal.find('.modal-body #edtid').val(id);
+    modal.find('.modal-body #nama').val(nama);
+    modal.find('.modal-body #supplier').val(supplier);
+    modal.find('.modal-body #harga').val(harga);
+    if (status == "Aktif") {
+      $('#ckedt').prop('checked', true);
+    } else {
+      $('#ckedt').prop('checked', false);
+    }
+    modal.find('.modal-footer #gambar').attr("src", gambar);
+  })
+
+  $('#delete').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+
+    var modal = $(this)
+    modal.find('.modal-body #delid').val(id);
+  })
 @endsection

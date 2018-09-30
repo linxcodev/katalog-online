@@ -25,4 +25,6 @@ Route::prefix('supplier')->group(function () {
 Route::prefix('produk')->group(function () {
   Route::get('/', 'ProdukController@index')->name('produk.index');
   Route::post('/', 'ProdukController@store')->name('produk.store');
+  Route::put('/', 'ProdukController@update')->name('produk.update');
+  Route::delete('/delete', 'ProdukController@destroy')->name('produk.destroy');
 });
