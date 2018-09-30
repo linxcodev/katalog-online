@@ -70,7 +70,7 @@
             <td>{{ $supplier->nama }}</td>
             <td>{{ $supplier->email }}</td>
             <td>{{ $supplier->kota }}</td>
-            <td>{{ $supplier->tahun }}</td>
+            <td>{{ date('Y') - $supplier->tahun }}</td>
             <td>
               <a href="#" class="btn btn-primary" data-toggle="modal"
               data-nama="{{$supplier->nama}}" data-email="{{$supplier->email}}"
